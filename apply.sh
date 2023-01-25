@@ -1,16 +1,47 @@
 #!/usr/bin/env bash
 set -ex
 
+function try_ln {
+  # try_ln <src> <dest>
+  if test -L "$2"
+  then
+    src="$(realpath "$1")"
+    dst="$(realpath "$2")"
+    if test "$src" = "$dst"
+    then
+      return 0
+    else
+      return 1
+    fi
+  fi
+  if test -e "$2"
+  then
+    return 1
+  fi
+  mkdir -p "$(dirname "$2")"
+  ln -s "$1" "$2"
+  return 0
+}
+
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 SCRIPT_DIR="$(realpath "$SCRIPT_DIR")"
 
 cd ~
 
-mkdir -p .config
-test ! -e .config/dotfiles
-ln -s "$SCRIPT_DIR/src" .config/dotfiles
+SRC_DIR="${HOME}/.config/dotfiles"
+try_ln "$SCRIPT_DIR/src" "$SRC_DIR"
 
-SRC_DIR="${HOME}/.config/dotfiles/"
+if ! try_ln "$SRC_DIR/zshrc.sh" .zshrc
+then
+  test ! -e .zshrc_local
+  mv .zshrc .zshrc_local
+  ln -s "$SRC_DIR/zshrc.sh" .zshrc
+fi
 
-ln -s "$SRC_DIR/zshrc.sh" .zshrc
-ln -s "$SRC_DIR/condarc.yml" .condarc
+try_ln "$SRC_DIR/condarc.yml" .condarc
+
+set +x
+
+echo
+echo ========================================
+echo Success!

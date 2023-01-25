@@ -85,3 +85,7 @@ swatch () {
         sleep 2
     done
 }
+
+if [ -f ~/.zshrc_local ]; then
+    source ~/.zshrc_local
+fi
