@@ -12,5 +12,5 @@ ln -s "$SCRIPT_DIR/src" .config/dotfiles
 
 SRC_DIR="${HOME}/.config/dotfiles/"
 
-ln -s "$SRC_DIR/zshrc" .zshrc
+ln -s "$SRC_DIR/zshrc.sh" .zshrc
 ln -s "$SRC_DIR/condarc.yml" .condarc
