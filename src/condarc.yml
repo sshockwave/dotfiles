@@ -1,0 +1,6 @@
+custom_channels:
+#  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  conda-forge: https://mirrors.aliyun.com/anaconda/cloud
+channels:
+  - conda-forge
+changeps1: false
