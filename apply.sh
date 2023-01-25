@@ -23,6 +23,12 @@ function try_ln {
   return 0
 }
 
+function force_ln_file {
+  rm -f "$2"
+  mkdir -p "$(dirname "$2")"
+  ln -s "$1" "$2"
+}
+
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 SCRIPT_DIR="$(realpath "$SCRIPT_DIR")"
 
@@ -39,6 +45,9 @@ then
 fi
 
 try_ln "$SRC_DIR/condarc.yml" .condarc
+force_ln_file /dev/null .zsh_history
+force_ln_file /dev/null .bash_history
+force_ln_file /dev/null .python_history
 
 set +x
 
