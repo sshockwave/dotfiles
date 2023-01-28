@@ -8,4 +8,5 @@ function conda_info {
 local conda='$(conda_info)'
 
 # Based on "cypher" theme
-PROMPT="${conda}%{${fg_bold[red]}%}:: %{${fg[green]}%}%3~%(0?. . %{${fg[red]}%}%? )%{${fg[blue]}%}»%{${reset_color}%} "
+PROMPT="${conda}%{${fg_bold[red]}%}:: %{${fg[green]}%}%3~ %{${fg[blue]}%}»%{${reset_color}%} "
+RPS1="%(?..%{${fg_bold[red]}%}%{${fg[red]}%}%? ↵%f)%{${reset_color}%}"
