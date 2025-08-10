@@ -38,7 +38,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
-ZSH_CUSTOM="${HOME}"/.config/dotfiles/zsh_custom
+ZSH_CUSTOM="${HOME}"/develop/dotfiles/src/zsh_custom
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -74,17 +74,6 @@ alias mm=micromamba
 mm activate daily
 
 alias start_v2ray='tmux new-session -d -s ray "/Users/sshockwave/Applications/v2ray/v2ray" run'
-
-swatch () {
-    while true
-    do
-        oput="$("${@}")"
-        printf '\033\143'
-        date
-        echo "$oput"
-        sleep 2
-    done
-}
 
 if [ -f ~/.zshrc_local ]; then
     source ~/.zshrc_local
